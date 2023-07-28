@@ -1,7 +1,7 @@
 const Blog = require('../models/Blog');
 
 //Create Blog Post
-exports.createBlog = async function (req, res) {
+exports.createBlog = async (req, res) => {
 	try {
 		const blog = await Blog.create(req.body);
 		res.json(blog);
@@ -16,7 +16,7 @@ exports.indexBlogs = async (req, res) => {
 		const indexBlogs = await Blog.find({});
 		res.json(indexBlogs);
 	} catch (error) {
-		res.status(404).json({ message: error.message });
+		res.status(400).json({ message: error.message });
 	}
 };
 

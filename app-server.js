@@ -1,10 +1,12 @@
 const express = require('express');
-const morgan = require('morgan');
-const blogRoutes = require('./routes/blogs');
 const app = express();
+//Import router
+const blogRoutes = require('./routes/blogs');
 
+//Setup middleware
 app.use(express.json());
-app.use(morgan('combined'));
-app.use('/blogs', blogRoutes);
+app.use(express.static('public'));
+// mount routes at /api/blog
+app.use('/api/blogs', blogRoutes);
 
 module.exports = app;

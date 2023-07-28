@@ -1,12 +1,10 @@
 require('dotenv').config();
-const express = require('express');
-const app = express();
+const app = require('./app-server');
 const PORT = process.env.PORT || 8000;
 const mongoose = require('mongoose');
 const path = require('path');
-const appServer = require('./app-server');
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGO_URI;
 const db = mongoose.connection;
 
 mongoose.connect(MONGODB_URI);
@@ -14,19 +12,6 @@ db.on('open', () => {
 	console.log('Mongo is Connected');
 });
 
-/* Middleware */
-app.use(express.json());
-if (process.env.NODE_ENV !== 'development') {
-	app.use(express.static('public'));
-}
-
-/* Controller Goes Here Remove the tes*/
-app.get('/test', (req, res) => {
-	res.status(200).json({
-		website: 'My Website',
-		info: 'Not that much'
-	});
-});
 /* Controller Ends here */
 //LISTENER
 
